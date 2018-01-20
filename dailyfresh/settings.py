@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'df_user',
     'df_goods',
+    'df_order',
+    'df_cart',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -114,4 +116,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+#开发阶段上传文件目录
+MEDIA_ROOT=os.path.join(BASE_DIR,'static/images/')
 
