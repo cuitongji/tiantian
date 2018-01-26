@@ -88,67 +88,67 @@ def logout(request):
     request.session.flush()
     return redirect('/')
 
-def user_center_info(request):
-    return render(request, 'df_user/user_center_info.html')
-
-def user_center_order(request):
-    return render(request, 'df_user/user_center_order.html')
-
-def user_center_site(request):
-    return render(request, 'df_user/user_center_site.html')
-
-
-# @user_decorator.login
 # def user_center_info(request):
-#     user_email=UserInfo.objects.get(id=request.session['user_id']).uemail
-#     #最近浏览
-#     goods_list=[]
-#     goods_ids=request.COOKIES.get('goods_ids','')
-#     if goods_ids!='':
-#         goods_ids1=goods_ids.split(',')#['']
-#         #GoodsInfo.objects.filter(id__in=goods_ids1)
-#         for goods_id in goods_ids1:
-#             goods_list.append(GoodsInfo.objects.get(id=int(goods_id)))
+#     return render(request, 'df_user/user_center_info.html')
 #
-#     context={'title':'用户中心',
-#              'user_email':user_email,
-#              'user_name':request.session['user_name'],
-#              'page_name':1,
-#              'goods_list':goods_list}
-#     return render(request,'df_user/user_center_info.html',context)
-#
-# @user_decorator.login
-# def user_center_order(request,pindex):
-#     order_list=OrderInfo.objects.filter(user_id=request.session['user_id']).order_by('-oid')
-#     paginator = Paginator(order_list,2)
-#     if pindex == '':
-#         pindex = '1'
-#     page = paginator.page(int(pindex))
-#
-#     context = {
-#         'title':'用户中心',
-#         'page_name':1,
-#         'paginator':paginator,
-#         'page':page,
-#     }
-#     return render(request,'user_center_order.html',context)
-#
-# @user_decorator.login
+# def user_center_order(request):
+#     return render(request, 'df_user/user_center_order.html')
+
 # def user_center_site(request):
-#     user = UserInfo.objects.get(id=request.session['user_id'])
-#     if request.metmod == 'POST':
-#         post = request.POST
-#         user.ushou = post.get('ushou')
-#         user.uaddress = post.get('uaddress')
-#         user.uyoubian = post.get('uyoubian')
-#         user.uphone = post.get('uphone')
-#         user.save()
-#     context = {
-#         'title':'用户中心',
-#         'user':user,
-#         'page_name':1,
-#     }
-#     return render(request,'user_center_site.html',context)
+#     return render(request, 'df_user/user_center_site.html')
+
+
+@user_decorator.login
+def user_center_info(request):
+    user_email=UserInfo.objects.get(id=request.session['user_id']).uemail
+    #最近浏览
+    goods_list=[]
+    goods_ids=request.COOKIES.get('goods_ids','')
+    if goods_ids!='':
+        goods_ids1=goods_ids.split(',')#['']
+        #GoodsInfo.objects.filter(id__in=goods_ids1)
+        for goods_id in goods_ids1:
+            goods_list.append(GoodsInfo.objects.get(id=int(goods_id)))
+
+    context={'title':'用户中心',
+             'user_email':user_email,
+             'user_name':request.session['user_name'],
+             'page_name':1,
+             'goods_list':goods_list}
+    return render(request,'df_user/user_center_info.html',context)
+
+@user_decorator.login
+def user_center_order(request,pindex):
+    order_list=OrderInfo.objects.filter(user_id=request.session['user_id']).order_by('-oid')
+    paginator = Paginator(order_list,2)
+    if pindex == '':
+        pindex = '1'
+    page = paginator.page(int(pindex))
+
+    context = {
+        'title':'用户中心',
+        'page_name':1,
+        'paginator':paginator,
+        'page':page,
+    }
+    return render(request,'df_user/user_center_order.html',context)
+
+@user_decorator.login
+def user_center_site(request):
+    user = UserInfo.objects.get(id=request.session['user_id'])
+    if request.method == 'POST':
+        post = request.POST
+        user.ushou = post.get('ushou')
+        user.uaddress = post.get('uaddress')
+        user.uyoubian = post.get('uyoubian')
+        user.uphone = post.get('uphone')
+        user.save()
+    context = {
+        'title':'用户中心',
+        'user':user,
+        'page_name':1,
+    }
+    return render(request,'df_user/user_center_site.html',context)
 
 
 

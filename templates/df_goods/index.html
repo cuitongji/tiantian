@@ -1,4 +1,4 @@
-{% extends 'df_goods/foot.html' %}
+{% extends 'foot.html' %}
 {% load staticfiles %}
 	{% block head %}
 	<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
@@ -8,47 +8,7 @@
 
 {% block body %}
 <body>
-	<div class="header_con">
-		<div class="header">
-			<div class="welcome fl">欢迎来到天天生鲜!</div>
-			<div class="fr">
-				{%if request.session.user_name|default:'' != ''%}
-				<div class="login_info fl">
-					欢迎您：<em>{{ request.session.user_name }}</em>
-					<span>|</span>
-					<a href="/logout/">退出</a>
-				</div>
-				{% else %}
-				<div class="login_btn fl">
-					<a href="/login/">登录</a>
-					<span>|</span>
-					<a href="/register/">注册</a>
-				</div>
-				{% endif %}
-				<div class="user_link fl">
-					<span>|</span>
-					<a href="user_center_info.html">用户中心</a>
-					<span>|</span>
-					<a href="cart.html">我的购物车</a>
-					<span>|</span>
-					<a href="user_center_order.html">我的订单</a>
-				</div>
-			</div>
-		</div>		
-	</div>
-
-	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="{% static 'images/logo.png' %}"></a>
-		<div class="search_con fl">
-			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
-			<input type="button" class="input_btn fr" name="" value="搜索">
-		</div>
-		<div class="guest_cart fr">
-			<a href="#" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl" id="show_count">1</div>
-		</div>
-	</div>
-
+	{% include 'df_goods/head.html' %}
 	<div class="navbar_con">
 		<div class="navbar">
 			<h1 class="fl">全部商品分类</h1>
