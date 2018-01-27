@@ -1,0 +1,14 @@
+		<div class="l_wrap fl clearfix">
+			<div class="new_goods">
+				<h3>新品推荐</h3>
+				<ul>
+					{% for goods in news %}
+					<li>
+						<a href="/{{ goods.id }}"><img src="/static/images/{{ goods.gpic }}"></a>
+						<h4><a href="/{{ goods.id }}">{{ goods.gtitle }}</a></h4>
+						<div class="prize">{{ goods.gprice}}</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>

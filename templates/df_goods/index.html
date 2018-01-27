@@ -1,4 +1,4 @@
-{% extends 'foot.html' %}
+{% extends 'df_goods/base.html' %}
 {% load staticfiles %}
 	{% block head %}
 	<script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
@@ -6,21 +6,7 @@
 	<script type="text/javascript" src="{% static 'js/slide.js' %}"></script>
 	{% endblock head %}
 
-{% block body %}
-<body>
-	{% include 'df_goods/head.html' %}
-	<div class="navbar_con">
-		<div class="navbar">
-			<h1 class="fl">全部商品分类</h1>
-			<ul class="navlist fl">
-				<li><a href="">首页</a></li>
-				<li class="interval">|</li>
-				<li><a href="">手机生鲜</a></li>
-				<li class="interval">|</li>
-				<li><a href="">抽奖</a></li>
-			</ul>
-		</div>
-	</div>
+	{% block all_three %}
 
 	<div class="center_con clearfix">
 		<ul class="subnav fl">
@@ -206,7 +192,6 @@
 		</div>
 	</div>
 
-{% endblock body %}
 
 	<script type="text/javascript" src="{% static 'js/slideshow.js' %}"></script>
 	<script type="text/javascript">
@@ -225,5 +210,8 @@
 			window.location.href = 'list.html';
 		}
 	</script>
+
+	{% endblock all_three %}
+
 </body>
 </html>
