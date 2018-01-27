@@ -66,7 +66,7 @@
 				{% for goods in type0 %}
 				<li>
 					<h4><a href="#">{{goods.gtitle|slice:'10'}}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="/static/{{goods.gpic}}"></a>
+					<a href="/{{ goods.id }}/"><img src="/static/images/{{ goods.gpic }}"></a>
 					<div class="prize">{{ goods.gprice }}</div>
 				</li>
 				{% endfor %}
@@ -92,7 +92,8 @@
 				{% for goods in type1 %}
 				<li>
 					<h4><a href="#">{{goods.gtitle|slice:'10'}}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="/static/{{goods.gpic}}"></a>
+					<!--<a href="/{{ goods.id }}/"><img src="/static/images/{{goods.gpic}}"></a>-->
+					<a href="/{{ goods.id }}/"><img src="/static/images/{{ goods.gpic }}"></a>
 					<div class="prize">{{ goods.gprice }}</div>
 				</li>
 				{% endfor %}
@@ -118,7 +119,7 @@
 				{% for goods in type2 %}
 				<li>
 					<h4><a href="#">{{goods.gtitle|slice:'10'}}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="/static/{{goods.gpic}}"></a>
+					<a href="/{{ goods.id }}/"><img src="/static/images/{{ goods.gpic }}"></a>
 					<div class="prize">{{ goods.gprice }}</div>
 				</li>
 				{% endfor %}
@@ -144,7 +145,7 @@
 				{% for goods in type3 %}
 				<li>
 					<h4><a href="#">{{goods.gtitle|slice:'10'}}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="/static/{{goods.gpic}}"></a>
+					<a href="/{{ goods.id }}/"><img src="/static/images/{{ goods.gpic }}"></a>
 					<div class="prize">{{ goods.gprice }}</div>
 				</li>
 				{% endfor %}
@@ -170,7 +171,7 @@
 				{% for goods in type4 %}
 				<li>
 					<h4><a href="#">{{goods.gtitle|slice:'10'}}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="/static/{{goods.gpic}}"></a>
+					<a href="/{{ goods.id }}/"><img src="/static/images/{{ goods.gpic }}"></a>
 					<div class="prize">{{ goods.gprice }}</div>
 				</li>
 				{% endfor %}
@@ -196,7 +197,7 @@
 				{% for goods in type5 %}
 				<li>
 					<h4><a href="#">{{goods.gtitle|slice:'10'}}</a></h4>
-					<a href="/{{ goods.id }}/"><img src="/static/{{goods.gpic}}"></a>
+					<a href="/{{ goods.id }}/"><img src="/static/images/{{ goods.gpic }}"></a>
 					<div class="prize">{{ goods.gprice }}</div>
 				</li>
 				{% endfor %}
