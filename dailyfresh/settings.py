@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'df_goods',
     'df_order',
     'df_cart',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -118,4 +119,35 @@ STATICFILES_DIRS = (
 
 #开发阶段上传文件目录
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/images/')
+
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+#自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+#每一页多少条数据
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 18
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+        },
+    },
+}
 
