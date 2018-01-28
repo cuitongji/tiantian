@@ -1,27 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
+{% extends 'foot.html' %}
+
+	{% block body %}
+
 <body>
-{% if query %}
-    <h3>搜索结果如下：</h3>
-    {%　for result in page.object_list %}
-        <a href="/{{ result.object.id }}/">{{ result.object.gtitle }}</a><br>
-    {% empty %}
-        <p>啥也没找到</p>
-    {% endfor %}
 
-    {% if page.has_previous or page.has_next %}
-        <div>
-            {% if page.has_previous %}<a href="?q={{ query }}&amp;
-            page={{ page.previous_page_number }}">{% endif %}&laquo;
-            上一页{% if page.has_previous %}</a>{% endif %}
+	<div class="header_con">
+		{% include 'head.html' %}
+	</div>
+	<div class="search_bar clearfix">
+		<a href="/" class="logo fl"><img src="/static/images/logo.png"></a>
+{%if page_name == 1%}
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;{{title}}</div>
+		<!--全文搜索-->
+		<div class="search_con fr">
+			<form method='get' action="/search/" target="_blank">
+			<input type="text" class="input_text fl" name="q" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" value="搜索">
+			</form>
+		</div>
+{%elif guest_cart|default:1 == 1%}
+		<div class="search_con fl">
+			<form method='get' action="/search/" target="_blank">
+			<input type="text" class="input_text fl" name="q" placeholder="搜索商品">
+			<input type="submit" class="input_btn fr" value="搜索">
+			</form>
+		</div>
+		<div class="guest_cart fr">
+			<a href="/cart/" class="cart_name fl">我的购物车</a>
+			<div class="goods_count fl" id="show_count">{{cart_count}}</div>
+		</div>
+{%endif%}
+	</div>
 
-            {% if page.has_next %}<a href="?q={{ query }}&amp;
-            page={{ page.next_page_number }}">{% endif %}&raquo;
-            上一页{% if page.has_next %}</a>{% endif %}
-        </div>
-</body>
-</html>
+
+
+	<div class="navbar_con">
+		<div class="navbar clearfix">
+			<div class="subnav_con fl">
+				<h1>全部商品分类</h1>
+				<span></span>
+				<ul class="subnav">
+					<li><a href="/list1_1_1/" class="fruit">新鲜水果</a></li>
+					<li><a href="/list2_1_1/" class="seafood">海鲜水产</a></li>
+					<li><a href="/list3_1_1/" class="meet">猪牛羊肉</a></li>
+					<li><a href="/list4_1_1/" class="egg">禽类蛋品</a></li>
+					<li><a href="/list5_1_1/" class="vegetables">新鲜蔬菜</a></li>
+					<li><a href="/list6_1_1/" class="ice">速冻食品</a></li>
+				</ul>
+			</div>
+			<ul class="navlist fl">
+				<li><a href="/">首页</a></li>
+				<li class="interval">|</li>
+				<li><a href="">手机生鲜</a></li>
+				<li class="interval">|</li>
+				<li><a href="">抽奖</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="breadcrumb">
+		&nbsp;&nbsp;全部分类&nbsp;>&nbsp;搜索
+	</div>
+
+	<div class="main_wrap clearfix">
+
+        <ul class="goods_type_list clearfix">
+				{%for item in page%}
+				<li>
+					<a href="/{{item.object.id}}/"><img src="/static/images/{{item.object.gpic}}"></a>
+					<h4><a href="/{{item.object.id}}/">{{item.object.gtitle}}</a></h4>
+					<div class="operate">
+						<span class="prize">￥{{item.object.gprice}}</span>
+						<span class="unit">{{item.object.gunit}}</span>
+						<a href="/cart/add{{item.object.id}}_1/" class="add_goods" title="加入购物车"></a>
+					</div>
+				</li>
+				{%endfor%}
+
+			</ul>
+
+        <div class="pagenation">
+
+				{%if page.has_previous%}
+				<a href="/search/?q={{query}}&amp;page={{page.previous_page_number}}"><上一页</a>
+				{%endif%}
+
+				{%for pindex in paginator.page_range%}
+				{%if pindex == page.number%}
+				<a href="#" class="active">{{pindex}}</a>
+				{%else%}
+				<a href="/search/?q={{query}}&amp;page={{pindex}}">{{pindex}}</a>
+				{%endif%}
+				{%endfor%}
+
+				{%if page.has_next%}
+				<a href="/search/?q={{query}}&amp;page={{page.next_page_number}}">下一页></a>
+				{%endif%}
+			</div>
+
+	</div>
+
+	{% endblock body %}

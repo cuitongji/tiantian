@@ -32,7 +32,7 @@
 
 			<div class="pagenation">
 				{% if page.has_previous %}
-				<a href="list{{ typeinfo.id }}_{{ page.previous_page_number }}_{{ sort }}/"><上一页</a>
+				<a href="/list{{ typeinfo.id }}_{{ page.previous_page_number }}_{{ sort }}"><上一页</a>
 				{% endif %}
 
 				{% for pindex in paginator.page_range %}
@@ -43,10 +43,11 @@
 				{%endif%}
 				{%endfor%}
 
-				{% if page.has_previous %}
-				<a href="list{{ typeinfo.id }}_{{ page.next_page_number }}_{{ sort }}/">下一页></a>
+				{% if page.has_next %}
+				<a href="/list{{ typeinfo.id }}_{{ page.next_page_number }}_{{ sort }}">下一页></a>
 				{% endif %}
 			</div>
+
 		</div>
 	</div>
 	{% endblock list_detail %}

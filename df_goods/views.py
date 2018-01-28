@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from django.core.paginator import Paginator
 from django.shortcuts import render
+from django.http import HttpResponse
 from models import *
 from df_cart.models import *
 
