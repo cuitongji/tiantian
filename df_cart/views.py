@@ -11,10 +11,12 @@ from models import *
 def cart(request):
     uid = request.session['user_id']
     carts = CartInfo.objects.filter(user_id=uid)
+    num = CartInfo.objects.filter(user_id=uid).count()
     context = {
         'title': '购物车',
         'page_names': 1,
         'carts': carts,
+        'num': num,
     }
     return render(request, 'df_cart/cart.html', context)
 

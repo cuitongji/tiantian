@@ -3,7 +3,6 @@
 from datetime import datetime
 from django.db import transaction
 from django.shortcuts import render, redirect
-
 from df_cart.models import CartInfo
 from df_order.models import OrderInfo, OrderDetailInfo
 from df_user import user_decorator
@@ -18,7 +17,7 @@ def order(request):
     get = request.GET
     cart_ids = get.getlist('cart_id')
     cart_ids1 = [int(item) for item in cart_ids]
-    carts = CartInfo.objects.filter(id__in=cart_ids)
+    carts = CartInfo.objects.filter(id__in=cart_ids1)
     # 构造传递到模板中的数据
     context = {
         'title': '提交订单',
@@ -27,7 +26,7 @@ def order(request):
         'user': user,
         'cart_ids': ','.join(cart_ids)
     }
-    return render(request, 'df_order/place_order.html', context)
+    return render(request, 'df_order/order.html', context)
 
 '''
 事物:一旦操作失败则全部退回
