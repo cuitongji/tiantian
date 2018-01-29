@@ -37,11 +37,12 @@ def order(request):
 ５,删除购物车
 '''
 
+
 @transaction.atomic()
 @user_decorator.login
-def order_handler(request):
+def order_handle(request):
     tran_id = transaction.savepoint()
-    #　接收购物车编号
+    # 接收购物车编号
     cart_ids = request.POST.get('cart_ids')
     try:
         # 创建订单对象
@@ -89,10 +90,10 @@ def order_handler(request):
         transaction.savepoint_commit(tran_id)
 
     except Exception as e:
-        print "===========================%s"%e
+        print "===========================%s" % e
         transaction.savepoint_rollback(tran_id)
 
-    return redirect('/order/')
+    return redirect('/user_center_order/')
 
 
 @user_decorator.login

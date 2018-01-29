@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from models import *
 from df_cart.models import *
 
+
 def index(request):
     # 查询各分类的最新四条,最热四条数据
     typelist = TypeInfo.objects.all()
@@ -22,26 +23,28 @@ def index(request):
     type5 = typelist[5].goodsinfo_set.order_by('-id')[0:4]
     type51 = typelist[5].goodsinfo_set.order_by('-gclick')[0:4]
 
-    context={'title': '首页', 'guest_cart': 1,
-             'type0': type0, 'type01': type01,
-             'type1': type1, 'type11': type11,
-             'type2': type2, 'type21': type21,
-             'type3': type3, 'type31': type31,
-             'type4': type4, 'type41': type41,
-             'type5': type5, 'type51': type51,
-             'cart_count': cart_count(request)}
+    context = {
+        'title': '首页', 'guest_cart': 1,
+        'type0': type0, 'type01': type01,
+        'type1': type1, 'type11': type11,
+        'type2': type2, 'type21': type21,
+        'type3': type3, 'type31': type31,
+        'type4': type4, 'type41': type41,
+        'type5': type5, 'type51': type51,
+        'cart_count': cart_count(request)}
     return render(request, 'df_goods/index.html', context)
+
 
 def list(request, tid, pindex, sort):
     typeinfo = TypeInfo.objects.get(pk=int(tid))
     news = typeinfo.goodsinfo_set.order_by('id')[0:2]
-    if sort == '1': # 按照最新排序（默认排序方式）
+    if sort == '1':  # 按照最新排序（默认排序方式）
         goods_list = GoodsInfo.objects.filter(gtype_id=int(tid)).order_by('-id')
-    elif sort == '2': # 按照价格排序
+    elif sort == '2':  # 按照价格排序
         goods_list = GoodsInfo.objects.filter(gtype_id=int(tid)).order_by('-gprice')
-    elif sort == '3': # 按照人气排序（点击量）
+    elif sort == '3':  # 按照人气排序（点击量）
         goods_list = GoodsInfo.objects.filter(gtype_id=int(tid)).order_by('-gclick')
-    paginator = Paginator(goods_list,10)
+    paginator = Paginator(goods_list, 10)
     page = paginator.page(int(pindex))
     context = {'title': typeinfo.ttitle,'guest_cart': 1,
                'page': page,
@@ -51,6 +54,7 @@ def list(request, tid, pindex, sort):
                'news': news,
                'cart_count': cart_count(request)}
     return render(request, 'df_goods/list.html', context)
+
 
 def detail(request, id):
     goods = GoodsInfo.objects.get(pk=int(id))
@@ -87,6 +91,7 @@ def detail(request, id):
     response.set_cookie('goods_ids', goods_ids)
 
     return response
+
 
 # 购物车的数量
 def cart_count(request):

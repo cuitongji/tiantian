@@ -82,7 +82,7 @@
 	</div>
 
 	<div class="order_submit clearfix">
-		<form method="post" action="/order/order_handler/">
+		<form method="post" action="/order/order_handle/">
 			{% csrf_token %}
 			<input type="hidden" name="address"
 				   value="{{ user.uaddress }} ({{ user.ushou }} 收) {{ user.uphone }}">
