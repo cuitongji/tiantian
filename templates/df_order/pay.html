@@ -8,9 +8,24 @@
 <h1>这是模拟的一个支付页面</h1>
 订单编号：{{order.oid}}<br>
 应付金额：{{order.ototal}}<br>
-付款成功，3秒后自动跳转
-<script>
-    setTimeout('location.href="/user_center_order/";',3000);
-</script>
+
+<script type="text/javascript">
+    window.onload = function(){
+        var oDiv = document.getElementById('div1');
+        var second = 4;
+        function timeleft(){
+            if(second>0)
+            {
+                second -= 1
+            }
+
+            setTimeout('location.href="/user_center_order/";',5000);
+            oDiv.innerHTML = '付款成功，'+second+'秒后自动跳转';
+        }
+        timeleft();
+        setInterval(timeleft,1000);
+    }
+    </script>
+<div id="div1"></div>
 </body>
 </html>

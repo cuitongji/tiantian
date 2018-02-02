@@ -49,7 +49,7 @@ def order_handle(request):
         order = OrderInfo()
         now = datetime.now()
         uid = request.session['user_id']
-        order.oid = '%s%d' % (now.strftime('%Y%m%d%H%M%s'), uid)
+        order.oid = '%s%d' % (now.strftime('%Y%m%d%H%M%S'), uid)
         order.user_id = uid
         order.odate = now
         order.oaddress = request.POST.get('address')

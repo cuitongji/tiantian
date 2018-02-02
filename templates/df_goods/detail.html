@@ -86,15 +86,22 @@
 		{% include 'df_goods/news.html' %}
 
 		<div class="r_wrap fr clearfix">
-			<ul class="detail_tab clearfix">
+			<ul class="detail_tab clearfix" id="detail_tab">
 				<li class="active">商品介绍</li>
 				<li>评论</li>
 			</ul>
-
-			<div class="tab_content">
-				<dl>
-					<dd>{{ goods.gcontent|safe }}</dd>
-				</dl>
+			
+			<div id="introduce_comment" class="introduce_comment">
+				<div class="tab_content">
+					<dl>
+						<dd>{{ goods.gcontent|safe }}</dd>
+					</dl>
+				</div>
+				<div class="tab_content">
+					<dl>
+						<dd>还没有评论</dd>
+					</dl>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -132,5 +139,24 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		var detail = document.getElementById('detail_tab').getElementsByTagName('li');
+		var content = document.getElementById('introduce_comment').getElementsByTagName('div');
 
+		for(var i=0;i<detail.length;i++)
+		{
+			(function (i) {
+				detail[i].onclick = function () {
+					for(var j=0;j<detail.length;j++)
+					{
+						detail[j].className = '';
+						content[j].style.display = 'none';
+					}
+
+					this.className = 'active';
+					content[i].style.display = 'block';
+				}
+			})(i)
+		}
+	</script>
 	{% endblock list_detail %}

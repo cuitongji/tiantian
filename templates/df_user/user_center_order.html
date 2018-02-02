@@ -6,7 +6,8 @@
 		$('.col04').each(function () {
 			num = parseFloat($(this).prev().text());
 			price = parseFloat($(this).prev().prev().find('span').text());
-			$(this).text(num*price+'元')
+			sum = num*price
+			$(this).text(sum.toFixed(2)+'元')
         });
     });
 </script>
