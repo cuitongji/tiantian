@@ -49,13 +49,14 @@ def order_handle(request):
         order = OrderInfo()
         now = datetime.now()
         uid = request.session['user_id']
-        order.oid = '%s%d'%(now.strftime('%Y%m%d%H%M%s'),uid)
+        order.oid = '%s%d' % (now.strftime('%Y%m%d%H%M%s'), uid)
         order.user_id = uid
         order.odate = now
         order.oaddress = request.POST.get('address')
         order.ototal = 0
         order.save()
-        # 创建详细订单对象
+
+        # 创建详单对象
         cart_ids1 = [int(item) for item in cart_ids.split(',')]
         total = 0
         for id1 in cart_ids1:
@@ -77,10 +78,10 @@ def order_handle(request):
                 count = cart.count
                 detail.count = count
                 detail.save()
-                total = total+price*count
+                total = total + price * count
                 # 删除购物车数据
                 cart.delete()
-            # 如果库存小于购买数量
+            # 如果库存小于购买量
             else:
                 transaction.savepoint_rollback(tran_id)
                 return redirect('/cart/')
@@ -90,16 +91,15 @@ def order_handle(request):
         transaction.savepoint_commit(tran_id)
 
     except Exception as e:
-        print "===========================%s" % e
+        print "========================%s" % e
         transaction.savepoint_rollback(tran_id)
-
     return redirect('/user_center_order/')
 
 
 @user_decorator.login
 def pay(request, oid):
     order = OrderInfo.objects.get(oid=oid)
-    order.OIsPay = True
+    order.oIsPay = True
     order.save()
     context = {'order': order}
     return render(request, 'df_order/pay.html', context)

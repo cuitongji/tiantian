@@ -124,7 +124,9 @@
 		{% for cart in carts %}
 		<ul class="cart_list_td clearfix" id="{{ cart.id }}">
 			<li class="col01"><input type="checkbox" name="cart_id" value="{{ cart.id }}" checked="checked"></li>
+			<a href="/{{ cart.goods.id }}/">
 			<li class="col02"><img src="/static/images/{{ cart.goods.gpic }}"></li>
+			</a>
 			<li class="col03">
 				{{ cart.goods.gtitle }}<br>
 				<span style="color: red; font-weight: bold; font-size: 14px;">
