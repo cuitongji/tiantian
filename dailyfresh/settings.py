@@ -26,9 +26,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p=!zu6)5!1_6wln^ja17gb!xfhrdhz(nphavr$gyz9jpxr&$_q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -111,6 +111,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATIC_ROOT = '/var/www/dailyfresh/static/'
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -118,7 +120,7 @@ STATICFILES_DIRS = (
 )
 
 #开发阶段上传文件目录
-MEDIA_ROOT=os.path.join(BASE_DIR,'static/images/')
+MEDIA_ROOT=os.path.join(BASE_DIR, 'static/images/')
 
 
 HAYSTACK_CONNECTIONS = {
